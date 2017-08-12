@@ -1,0 +1,191 @@
+#: import SlideTransition kivy.uix.screenmanager.FadeTransition
+
+<DevLabel@Label>:
+	size_hint_y: None
+	text_size: self.size
+	height: 17
+	markup: True
+	halign: 'left'
+	valign: 'bottom'
+	
+<DevBox@BoxLayout>:
+
+<SidewaysButton@Button>:
+	size_hint_y: None
+	size_hint_x: None
+	# turn button sideways
+	canvas.before:
+        PushMatrix
+        Rotate:
+            angle: 90
+            origin: self.center
+    canvas.after:
+        PopMatrix
+	
+<ThumbLabel@Label>:
+	markup: True
+	
+<Thumbnail>:	
+	size_hint: (None, None)
+	size: (200, 275)
+	padding: 10
+	BoxLayout:
+		size_hint: (None, None)
+		size: (self.parent.width, self.parent.height)
+		pos: (self.parent.x, self.parent.y)
+		padding: 5
+		orientation: 'vertical'
+		AsyncImage:
+			id: preview
+			allow_stretch: True
+			canvas.before:
+				Color:
+					rgba: 0.2, 0.3451, 0.5098, 1
+				Rectangle:
+					pos: self.pos
+					size: self.size
+		BoxLayout:
+			id: post_score
+			size_hint_y: None
+			size_hint_x: None
+			width: preview.width
+			height: 25
+			canvas.before:
+				Color:
+					rgba: 0.2, 0.3451, 0.5098, 1
+				Rectangle:
+					pos: self.pos
+					size: self.size
+			ThumbLabel:
+				id: score
+				halign: 'right'
+				text: ""
+			ThumbLabel:
+				id: fav_count
+				text: ""
+			ThumbLabel:
+				id: rating
+				text: ""
+
+<PostSelectionScreen>:
+	name: "postSelection"
+					
+<PostViewScreen>:
+	name: 'postView'
+		
+<K621Ui>:
+	ScreenCoordinator:
+		id: screenCoord
+		metadata: pGrid.metadata
+		#on_metadata: print("My data changed") # <-- Wow thats cool
+		PostSelectionScreen:
+			BoxLayout:
+				id: main_view
+				orientation: 'vertical'
+				ScrollView:
+					id: gridScroll
+					canvas.before:
+						Color:
+							rgba: 0.0039, 0.1804, 0.3373, 1
+						Rectangle:
+							pos: self.pos
+							size: self.size
+					do_scroll_x: False
+					do_scroll_y: True
+					size_hint_x: 0.8
+					pos_hint: {'center_x': .5}
+					BoxLayout:
+						orientation: 'vertical'
+						size_hint_x: 1
+						size_hint_y: None
+						height: pGrid.height + 50
+						PostGrid:
+							id: pGrid
+							origin: root
+							currentPage: screenCoord.currentPage
+							size_hint_x: 1
+							size_hint_y: None
+						BoxLayout:
+							id: pageSelection
+							Button:
+								text: 'Previous Page'
+								on_release: screenCoord.currentPage -= 1
+							Label:
+								text: 'Current Page: ' + str(screenCoord.currentPage)
+							Button:
+								text: 'Next Page'
+								on_release: screenCoord.currentPage += 1
+						
+		PostViewScreen:
+			id: postView
+			origin: root
+			metadata: screenCoord.metadata
+			target: screenCoord.new_target
+			BoxLayout:
+				orientation: 'horizontal'
+				Accordion:
+					orientation: 'vertical'
+					AccordionItem:
+						id: postAI
+						title: "post:#/x amount of tags"
+						collapse: False
+						AsyncImage:
+							id: mainPostImage
+							allow_strech: True
+							size: postAI.size
+					AccordionItem:
+						title: "Comments"
+						collapse: True
+						Label:
+							id: comments
+							markup: True
+							text: 'comments go here.\n' * 10
+				BoxLayout:
+					orientation: 'vertical'
+					size_hint_x: None
+					width: 60
+					Button:
+						width: 100
+						height: 100
+						text: "Back"
+						on_release:
+							screenCoord.transition.direction = 'right' 
+							screenCoord.current = 'postSelection'
+						
+	DevBox:
+		id: dev_info 
+		pos: (20, root.height-self.height)
+		orientation: 'vertical'
+		size_hint: (None, None)
+		height: 0 # 0 = Disabled, root.height = Enabled
+		width: root.width
+		DevLabel:
+			text: "[b]Window info:[/b]"
+		DevLabel:
+			text: "Width: " + str(root.width)
+		DevLabel:
+			text: "Height: " + str(root.height)
+		DevLabel:
+			text: "Scroll Width: " + str(gridScroll.width)
+		DevLabel:
+			text: "pGrid Spacing: " + str(pGrid.spacing)
+		DevLabel:
+			text: "posts: " + str(pGrid.postCount)
+		DevLabel:
+			text: "new_target: " + str(screenCoord.new_target)
+		DevBox:
+			id: dev_target_info 
+			orientation: 'vertical'
+			DevLabel:
+				text: '[b]Post Info:[/b]'
+			Widget:
+			
+		
+		
+		
+		
+		
+		
+		
+		
+		

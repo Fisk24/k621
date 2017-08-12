@@ -1,0 +1,22 @@
+<Thumbnail>:
+	canvas.before:
+		Color:
+			rgba: 1, 46, 86, 1
+		Rectangle:
+			pos: self.pos
+			size: self.size
+			
+		
+		
+Thumbnail:
+			size_hint: (None, None)
+			size: (200, 275)
+			BoxLayout:
+				size_hint: (None, None)
+				size: (self.parent.width, self.parent.height)
+				orientation: 'vertical'
+				AsyncImage:
+					source: 'https://static1.e621.net/data/42/fb/42fb3a70ca71754e28b91b10af48d4ff.jpg'
+				BoxLayout:
+					Label:
+						text: "↑1"

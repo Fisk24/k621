@@ -1,0 +1,5 @@
+## settings ##
+check boxes for the ratings that the user wants to see
+- Safe
+- Questionable
+- Explicit
