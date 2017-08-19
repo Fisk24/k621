@@ -1,9 +1,11 @@
 #! /usr/bin/python3
 
+import sys
+
 from kivy.app    import App
 from kivy.lang   import Builder
 from kivy.config import Config
-Config.set('graphics', 'width', '800')
+Config.set('graphics', 'width', '900')
 Config.set('graphics', 'height', '1011')
 
 from kivy.core.window import Window
@@ -16,20 +18,32 @@ from kivy.uix.widget        import Widget
 from kivy.uix.screenmanager import ScreenManager
 from kivy.uix.screenmanager import SlideTransition
 from kivy.uix.screenmanager import Screen
+from kivy.uix.actionbar     import ActionBar
+from kivy.uix.settings      import SettingsWithSidebar
 
 from kivy.properties import ObjectProperty
 
 from lib.uix.thumb             import Thumbnail
-from lib.uix.postGrid          import PostGrid
+from lib.uix.postgrid          import PostGrid
 from lib.uix.screencoordinator import ScreenCoordinator
-from lib.uix.postView          import PostViewScreen
+from lib.uix.queueviewscreen   import QueueViewScreen
+from lib.uix.postView          import PostView
+from lib.uix.comments          import CommentManager
 
 # Window size should be 800x1011
-Window.clearcolor = (0.1059, 0.1059, 0.2667, 1)
+Window.clearcolor = (0, 0, 0.2, 0)
 Window.minimum_width = 530
 Window.minimum_height = 530
 
 class PostSelectionScreen(Screen):
+	'''
+		Move me to gridView.py
+		Change gridView class name to postSelector or similar
+		Fix all references broken by this change
+	'''
+	pass
+
+class K621ActionBar(ActionBar):
 	pass
 
 class K621Ui(FloatLayout):
@@ -44,3 +58,20 @@ class K621App(App):
 	
 if __name__ == "__main__":
 	K621App().run()
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

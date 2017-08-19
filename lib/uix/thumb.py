@@ -22,9 +22,10 @@ class Thumbnail(ButtonBehavior, Widget):
 		self.setBgColor()
 		
 	def on_release(self):
-		self.root.ids.screenCoord.transition.direction = 'left'
-		self.root.ids.screenCoord.current = 'postView'
-		self.root.ids.screenCoord.new_target = self.metadata['id']
+		#self.root.ids.screenCoord.transition.direction = 'left'
+		#self.root.ids.screenCoord.current = 'queueView'
+		#self.root.ids.screenCoord.new_target = self.metadata['id']
+		self.root.ids.queueManager.addPostViewScreen(self.metadata)
 		
 		
 	def setRating(self, rating):

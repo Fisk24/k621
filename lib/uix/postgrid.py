@@ -31,7 +31,7 @@ class PostGrid(GridLayout):
 		
 		self.scrapper = Scrapper()
 		
-		Clock.schedule_once(self.populateGrid, 1)
+		Clock.schedule_once(self.populateGrid, 1) # we proc this type of behaior differently in the comment module, consider doing the same here
 		
 	def on_currentPage(self, obj, page):
 		self.postCount = 0

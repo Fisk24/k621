@@ -1,0 +1,29 @@
+#: include lib/uix/comments.kv
+<PostView>:
+	orientation: 'horizontal'
+	ScrollView:
+		BoxLayout:
+			height: mainPostImage.height + comments.height
+			orientation: 'vertical'
+			size_hint_y: None
+			AsyncImage:
+				id: mainPostImage
+				allow_strech: True
+				size_hint_y: None
+				height: 1080
+			CommentManager:
+				id: comments
+				origin: root
+				comments: root.comments
+				
+	BoxLayout:
+		orientation: 'vertical'
+		size_hint_x: None
+		width: 60
+		Button:
+			width: 100
+			height: 100
+			text: "Back"
+			on_release:
+				root.coordinator.transition.direction = 'right' 
+				root.coordinator.current = 'postSelection'
